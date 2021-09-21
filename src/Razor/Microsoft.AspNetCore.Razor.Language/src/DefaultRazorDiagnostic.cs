@@ -1,5 +1,7 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
+
+#nullable enable
 
 using System;
 using Microsoft.Extensions.Internal;
@@ -10,7 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         internal DefaultRazorDiagnostic(RazorDiagnosticDescriptor descriptor, SourceSpan span, object[] args)
         {
-            Descriptor = descriptor;
+            Descriptor = descriptor ?? throw new ArgumentNullException(nameof(descriptor));
             Span = span;
             Args = args;
         }
@@ -27,7 +29,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         // Internal for testing
         internal object[] Args { get; }
 
-        public override string GetMessage(IFormatProvider formatProvider)
+        public override string GetMessage(IFormatProvider? formatProvider)
         {
             var format = Descriptor.GetMessageFormat();
             return string.Format(formatProvider, format, Args);
