@@ -12,5 +12,10 @@ namespace Microsoft.AspNetCore.Http.Metadata
         /// Gets the collection of tags associated with the endpoint.
         /// </summary>
         IReadOnlyList<string> Tags { get; }
+
+        /// <summary>
+        /// Just a test.
+        /// </summary>
+        bool TestingDotnetFormat { get; }
     }
 }
